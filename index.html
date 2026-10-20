@@ -7,14 +7,14 @@
 <title>Hướng dẫn vẽ hình</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Serif:ital,wght@1,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Noto+Serif:ital,wght@1,500&display=swap">
 <style>
 /* Layout: bàn vẽ (sân khấu SVG kéo được) bên trái, phiếu từng bước bên phải; xếp chồng trên điện thoại */
 :root{
   --bg:#EEF2F3; --paper:#FFFFFF; --grid:#E3EAEC; --ink:#18303A; --muted:#5A6E76; --line:#C9D5D8;
   --accent:#0E7C73; --accent-soft:#D7EFEC; --amber:#B86A0B; --amber-soft:#FBEBD3; --aux:#9AAEB4; --ok:#1F7A3A; --warn:#B3261E;
   --code:#F3F6F7;
-  --f-display:"Lexend","Be Vietnam Pro",system-ui,sans-serif;
+  --f-display:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
   --f-math:"Noto Serif","Times New Roman",serif;
@@ -27,7 +27,7 @@
   --accent:#3CC7B8; --accent-soft:#163A39; --amber:#F2B04F; --amber-soft:#3A2B14; --aux:#5E7680; --ok:#5DD08A; --warn:#FF8A80; --code:#101B21; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;margin:0}
-.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 0}
 h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 header.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
 header.top h1{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.01em}
@@ -105,9 +105,6 @@ svg.board{display:block;width:100%;height:auto;aspect-ratio:1.18;touch-action:no
 .gsp{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 .menu{font:600 12.5px var(--f-body);background:var(--code);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;white-space:nowrap}
 .tool{font:600 12.5px var(--f-body);color:var(--accent);background:var(--accent-soft);border-radius:5px;padding:1px 7px;white-space:nowrap}
-.tools{margin-top:22px}
-.tools h2{font-size:20px;margin-bottom:4px}
-.tools>p{color:var(--muted);margin:0 0 12px;max-width:70ch}
 .toolgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .toolgrid .card{padding:12px 14px}
 .toolgrid .tn{font:600 14px var(--f-display)}
@@ -120,16 +117,57 @@ svg.board{display:block;width:100%;height:auto;aspect-ratio:1.18;touch-action:no
 .qa .q{margin:0 0 6px}
 .qa details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13px}
 .qa details p{margin:6px 0 0}
-.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .rules .card h3{font-size:15px;margin-bottom:4px}
 .rules .card p{margin:0;color:var(--muted);font-size:14px}
-.fix{margin-top:22px}
-.fix h2{font-size:20px;margin-bottom:10px}
 .fixgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .fixgrid .card p{margin:4px 0 0;color:var(--muted);font-size:14px}
 .fixgrid .card b{font-family:var(--f-display);font-weight:600}
 .all summary{cursor:pointer;font-weight:600}
 .all ol{font:13px var(--f-mono);padding-left:26px;margin:10px 0 0;overflow-x:auto}
+
+/* Nhận diện theo bìa sách: dải xanh đêm có lưới ô ly, chữ đậm, số 9 màu bạc hà, điểm nhấn vàng */
+:root{--mast-a:#0A2427;--mast-b:#11504A;--mast-ink:#F2FBF9;--mast-muted:#A9CFC8;--mint:#5BE8D0;--gold:#F7C02B;--gold-ink:#1D1A0A;--mast-line:rgba(255,255,255,.07)}
+.mast{background:radial-gradient(120% 140% at 100% 0%,#17736A 0%,transparent 55%),linear-gradient(160deg,var(--mast-a),var(--mast-b));color:var(--mast-ink);position:relative;overflow:hidden}
+.mast::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--mast-line) 1px,transparent 1px),linear-gradient(90deg,var(--mast-line) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.mast-in{position:relative;max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 34px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:8px 40px;align-items:center}
+.mast-top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.lockup{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.lockup .wm{font:800 15px/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase}
+.lockup .wm em{font-style:normal;color:var(--mint)}
+.lockup .pill{font:600 11px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 10px;color:var(--mast-muted)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.btn.gold:hover{border-color:var(--mast-ink)}
+.mast .kicker{font:700 12px var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.mast h1{font:800 clamp(32px,5vw,52px)/1.08 var(--f-display);letter-spacing:-.02em;margin:8px 0 12px}
+.mast .lead{margin:0;max-width:58ch;font-size:16px;color:var(--mast-muted)}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
+.facts li{font-size:13px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.05);border-radius:999px;padding:5px 12px;color:var(--mast-ink)}
+.facts b{color:var(--mint);font-weight:700}
+.deco{width:100%;height:auto;display:block}
+.deco .l{fill:none;stroke:var(--mast-ink);stroke-opacity:.8;stroke-width:1.4}
+.deco .c{fill:none;stroke:var(--mint);stroke-width:2}
+.deco .y{stroke:var(--gold);stroke-width:2.4;fill:none}
+.deco .d{stroke:#FF9C8A;stroke-opacity:.7;stroke-dasharray:4 4;fill:none;stroke-width:1.2}
+.deco circle.p{fill:var(--mast-ink)}
+.deco text{font:italic 500 14px var(--f-math);fill:var(--mast-ink)}
+.sec-h{display:flex;flex-direction:column;gap:2px;margin:0 0 12px}
+.sec-h .k{font:700 12px var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.sec-h h2{font:800 22px/1.25 var(--f-display);letter-spacing:-.01em}
+.sec-h p{color:var(--muted);margin:4px 0 0;max-width:70ch}
+.sect{margin-top:36px;padding-top:28px;border-top:1px solid var(--line)}
+.rules{margin-top:0}
+.rules .card h3::before{content:"";display:block;width:22px;height:3px;border-radius:2px;background:var(--amber);margin-bottom:10px}
+.stage{box-shadow:0 1px 0 var(--line),0 10px 30px -18px rgba(10,40,45,.35)}
+.foot{background:linear-gradient(160deg,var(--mast-a),var(--mast-b));color:var(--mast-muted);margin-top:40px}
+.foot-in{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 32px;display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between;align-items:flex-start;font-size:14px}
+.foot-in p{margin:8px 0 0;max-width:60ch}
+.foot .lockup{color:var(--mast-ink)}
+.foot-links{display:flex;gap:16px;flex-wrap:wrap}
+.foot-links a{color:var(--mast-ink);text-decoration:none;font-weight:600;border-bottom:1px solid rgba(255,255,255,.3)}
+.foot-links a:hover{border-color:var(--mint)}
+.foot a:focus-visible,.mast a:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+@media (max-width:960px){.mast-in{grid-template-columns:minmax(0,1fr)}.deco-wrap{display:none}}
 @media (max-width:960px){
   .main{grid-template-columns:minmax(0,1fr)}
   .stage{position:relative;top:auto}
@@ -143,17 +181,37 @@ svg.board{display:block;width:100%;height:auto;aspect-ratio:1.18;touch-action:no
 <style>html{color-scheme:light dark}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
+<header class="mast" id="dau-trang">
+  <div class="mast-in">
+    <div class="mast-top">
+      <div class="lockup"><span class="wm">Tư duy hình học <em>9</em></span><span class="pill">Năm học 2025 – 2026</span></div>
+      <a class="btn gold" href="https://www.geogebra.org/classic" target="_blank" rel="noopener">Mở GeoGebra Classic ↗</a>
+    </div>
     <div>
-      <div class="eyebrow">Tư duy hình học 9</div>
+      <div class="kicker">Trang đồng hành của sách</div>
       <h1>Hướng dẫn vẽ hình</h1>
-      <p>Mỗi hình em tự tay dựng được là một lần em hiểu bài sâu hơn. Cứ kiên nhẫn từng bước, kéo thử, quan sát, rồi em sẽ thấy hình học thú vị hơn mình nghĩ nhiều. Cố lên nhé!</p>
+      <p class="lead">Mỗi hình em tự tay dựng được là một lần em hiểu bài sâu hơn. Cứ kiên nhẫn từng bước, kéo thử, quan sát, rồi em sẽ thấy hình học thú vị hơn mình nghĩ nhiều. Cố lên nhé!</p>
+      <ul class="facts">
+        <li><b>4</b> bài dựng từng bước</li>
+        <li>GeoGebra bằng chuột · bằng lệnh</li>
+        <li>Sketchpad</li>
+        <li>Kéo điểm, quan sát, khái quát</li>
+      </ul>
     </div>
-    <div class="open-links">
-      <a class="btn" href="https://www.geogebra.org/classic" target="_blank" rel="noopener">Mở GeoGebra Classic ↗</a>
+    <div class="deco-wrap" aria-hidden="true">
+      <svg class="deco" viewBox="20 6 280 290">
+        <circle class="c" cx="160" cy="150" r="118"/>
+        <polygon class="l" points="149.7,32.4 50.6,194.2 269.4,194.2"/>
+        <path class="l" d="M149.7 32.4V194.2M50.6 194.2L192 89.6M269.4 194.2L110.3 96.7"/>
+        <path class="d" d="M149.7 32.4L170.3 267.6"/>
+        <path class="y" d="M149.7 120.9L170.3 267.6"/>
+        <circle class="p" cx="149.7" cy="120.9" r="3.2"/><circle class="p" cx="160" cy="194.2" r="3.2"/><circle class="p" cx="170.3" cy="267.6" r="3.2"/><circle class="p" cx="160" cy="150" r="2.6"/>
+        <text x="143" y="24">A</text><text x="32" y="204">B</text><text x="276" y="204">C</text><text x="131" y="117">H</text><text x="166" y="148">O</text><text x="133" y="213">D</text><text x="165" y="213">M</text><text x="176" y="284">K</text><text x="196" y="86">E</text><text x="94" y="94">F</text>
+      </svg>
     </div>
-  </header>
+  </div>
+</header>
+<div class="wrap">
 
   <div class="tabs" role="tablist" id="tabs"></div>
 
@@ -173,20 +231,22 @@ svg.board{display:block;width:100%;height:auto;aspect-ratio:1.18;touch-action:no
     </section>
   </div>
 
-  <section class="tools">
-    <h2>Công cụ GeoGebra dùng trong trang</h2>
-    <p>Tên công cụ ghi theo GeoGebra tiếng Anh. Nếu máy để tiếng Việt, rê chuột lên biểu tượng sẽ hiện tên tiếng Việt; vị trí và hình biểu tượng không đổi. Mỗi biểu tượng trên thanh công cụ là một nhóm, bấm vào để mở các công cụ cùng nhóm.</p>
+  <section class="tools sect">
+    <div class="sec-h"><span class="k">Bộ công cụ</span><h2>Công cụ GeoGebra dùng trong trang</h2><p>Tên công cụ ghi theo GeoGebra tiếng Anh. Nếu máy để tiếng Việt, rê chuột lên biểu tượng sẽ hiện tên tiếng Việt; vị trí và hình biểu tượng không đổi. Mỗi biểu tượng trên thanh công cụ là một nhóm, bấm vào để mở các công cụ cùng nhóm.</p></div>
     <div class="toolgrid"><div class="card"><div class="tn">Move</div><div class="gr">Mũi tên, nhóm đầu tiên</div><p>Kéo điểm tự do, chọn đối tượng. Bấm Esc là quay về công cụ này.</p></div><div class="card"><div class="tn">Point</div><div class="gr">Nhóm điểm (biểu tượng chấm A)</div><p>Bấm chỗ trống: điểm tự do. Bấm lên đường thẳng, đường tròn: điểm dính vào đường đó.</p></div><div class="card"><div class="tn">Intersect</div><div class="gr">Nhóm điểm</div><p>Bấm lần lượt hai đối tượng cắt nhau.</p></div><div class="card"><div class="tn">Midpoint or Center</div><div class="gr">Nhóm điểm</div><p>Bấm hai điểm, hoặc bấm một đoạn thẳng. Bấm đường tròn để lấy tâm.</p></div><div class="card"><div class="tn">Segment, Line, Ray</div><div class="gr">Nhóm đường thẳng</div><p>Bấm điểm đầu rồi điểm thứ hai. Ray: điểm đầu là gốc tia.</p></div><div class="card"><div class="tn">Perpendicular Line</div><div class="gr">Nhóm đường vuông góc</div><p>Bấm điểm rồi bấm đường thẳng (hoặc đoạn) cần vuông góc.</p></div><div class="card"><div class="tn">Tangents</div><div class="gr">Nhóm đường vuông góc</div><p>Bấm điểm rồi bấm đường tròn: được tiếp tuyến qua điểm đó.</p></div><div class="card"><div class="tn">Locus</div><div class="gr">Nhóm đường vuông góc</div><p>Bấm điểm cần tìm quỹ tích, rồi bấm điểm đang chạy.</p></div><div class="card"><div class="tn">Polygon</div><div class="gr">Nhóm đa giác (biểu tượng tam giác)</div><p>Bấm lần lượt các đỉnh, bấm lại đỉnh đầu để khép kín.</p></div><div class="card"><div class="tn">Circle with Center through Point</div><div class="gr">Nhóm đường tròn</div><p>Bấm tâm trước, bấm điểm trên đường tròn sau.</p></div><div class="card"><div class="tn">Circle with Center and Radius</div><div class="gr">Nhóm đường tròn</div><p>Bấm tâm, gõ bán kính rồi OK.</p></div><div class="card"><div class="tn">Compass</div><div class="gr">Nhóm đường tròn</div><p>Bấm hai điểm (hoặc một đoạn) để lấy bán kính, rồi bấm tâm.</p></div><div class="card"><div class="tn">Angle</div><div class="gr">Nhóm góc</div><p>Bấm ba điểm, đỉnh góc bấm ở giữa; hoặc bấm hai đường thẳng.</p></div><div class="card"><div class="tn">Distance or Length</div><div class="gr">Nhóm góc</div><p>Bấm hai điểm hoặc một đoạn thẳng: hiện độ dài.</p></div><div class="card"><div class="tn">Area</div><div class="gr">Nhóm góc</div><p>Bấm vào một đa giác: hiện diện tích.</p></div><div class="card"><div class="tn">Reflect about Point</div><div class="gr">Nhóm biến hình</div><p>Bấm đối tượng cần lấy đối xứng, rồi bấm tâm đối xứng.</p></div><div class="card"><div class="tn">Relation</div><div class="gr">Nhóm chữ ABC</div><p>Bấm hai đối tượng: GeoGebra cho biết chúng song song, vuông góc, bằng nhau hay điểm có nằm trên đường không.</p></div><div class="card"><div class="tn">Chuột phải</div><div class="gr">Trên bất kì đối tượng nào</div><p>Đổi tên (Rename), ẩn (Show Object), bật vết (Show Trace), cho điểm tự chạy (Animation).</p></div></div>
   </section>
 
+  <section class="sect">
+    <div class="sec-h"><span class="k">Nguyên tắc</span><h2>Ba điều cần nhớ khi dựng hình</h2></div>
   <div class="rules">
     <div class="card"><h3>Dựng, không đặt bằng mắt</h3><p>Trung điểm, chân đường vuông góc, giao điểm phải tạo bằng lệnh. Điểm đặt bằng mắt sẽ lệch khi kéo.</p></div>
     <div class="card"><h3>Chỉ kéo điểm tự do</h3><p>Điểm đề cho “bất kì” (A trên đường tròn, E trên d) là điểm tự do. Mọi điểm khác chạy theo.</p></div>
     <div class="card"><h3>Làm phép thử kéo</h3><p>Dựng xong, kéo từng điểm tự do. Hình không vỡ thì đã dựng đúng; lúc đó mới đo và đoán.</p></div>
   </div>
+  </section>
 
-  <section class="fix">
-    <h2>Khi bị kẹt</h2>
+  <section class="fix sect">
+    <div class="sec-h"><span class="k">Gỡ rối</span><h2>Khi bị kẹt</h2></div>
     <div class="fixgrid">
       <div class="card"><b>GeoGebra báo lỗi lệnh</b><p>Kiểm tra dấu phẩy, ngoặc tròn và chữ hoa đầu lệnh (Midpoint, không phải midpoint). Lệnh tiếng Anh vẫn chạy khi giao diện để tiếng Việt. Dán và Enter từng dòng một.</p></div>
       <div class="card"><b>Sketchpad: lệnh trong menu bị mờ</b><p>Em chưa chọn đúng đối tượng. Perpendicular Line cần đúng một điểm và một đường thẳng; Circle By Center+Point cần chọn tâm trước, điểm sau. Bấm vào chỗ trống để bỏ chọn rồi chọn lại.</p></div>
@@ -197,6 +257,18 @@ svg.board{display:block;width:100%;height:auto;aspect-ratio:1.18;touch-action:no
     </div>
   </section>
 </div>
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <div class="lockup"><span class="wm">Tư duy hình học <em>9</em></span></div>
+      <p>Trang đồng hành của sách tự học hình học lớp 9. Các bài dựng lấy từ đề kiểm tra của các trường THCS ở Hà Nội. Phần mềm giúp em dự đoán; lời giải vẫn phải chứng minh theo sách.</p>
+    </div>
+    <div class="foot-links">
+      <a href="#dau-trang">Lên đầu trang ↑</a>
+      <a href="https://www.geogebra.org/classic" target="_blank" rel="noopener">GeoGebra Classic ↗</a>
+    </div>
+  </div>
+</footer>
 
 <script>
 // ---------------- hình học
