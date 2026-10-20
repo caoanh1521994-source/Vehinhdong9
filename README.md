@@ -1,4 +1,4 @@
-# Bàn vẽ hình động
+# Hướng dẫn vẽ hình
 
 Trang hướng dẫn học sinh lớp 9 dựng hình bằng GeoGebra (bấm chuột hoặc gõ lệnh) và The Geometer's Sketchpad, đi kèm sách *Tư duy hình học 9*.
 
